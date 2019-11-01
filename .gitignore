@@ -1,2 +1,12 @@
 *.org~
 .DS_Store
+.places
+autosave/
+bookmarks
+elpa/
+emacs.el
+emacs_backup/
+emojis/
+projectile-bookmarks.eld
+recentf
+smex-items
