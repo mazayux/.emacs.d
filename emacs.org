@@ -2342,6 +2342,8 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
                         ("Challenge" . ?1)
                         ("Average" . ?2)
                         ("Easy" . ?3)
+                        ;; Encryption
+                        ("crypt" . ?c)
                         ))
 #+END_SRC
 *** Other
