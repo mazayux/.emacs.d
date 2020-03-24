@@ -595,8 +595,8 @@ Over time, I've come to prefer Eshell over shell mode or Ansi-term. The main fea
                 ("<s-down>" . comint-next-input))
     :init
     (dirtrack-mode)
-    (setq explicit-shell-file-name (cond ((is-linux-p) "/bin/bash")
-                                         ((is-mac-p) "/usr/bin/bash")))
+    (setq explicit-shell-file-name (cond ((is-linux-p) "/bin/zsh")
+                                         ((is-mac-p) "/bin/zsh")))
     (when (is-mac-p)
       (use-package exec-path-from-shell
         :init
@@ -1710,7 +1710,7 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
     (org-image-actual-width '(600))
     :init
     (setq default-major-mode 'org-mode
-          org-directory "~/org/"
+          org-directory "~/org"
           org-log-done t
           org-startup-indented t
           org-startup-truncated nil
@@ -1749,7 +1749,7 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
           org-fontify-whole-heading-line t
           org-fontify-done-headline t
           org-fontify-quote-and-verse-blocks t
-          org-mobile-inbox-for-pull  "~/org/gtd/inbox.org" ;; Set to the name of the file where new notes will be stored
+          org-mobile-inbox-for-pull  "~/org/flagged.org" ;; Set to the name of the file where new notes will be stored
           org-mobile-directory "~/Dropbox/Apps/MobileOrg") ;; Set to <your Dropbox root directory>/MobileOrg.
 
     (add-to-list 'org-global-properties
