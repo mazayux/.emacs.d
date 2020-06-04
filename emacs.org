@@ -122,9 +122,8 @@ Load spacemacs-light automatically on startup.
 #+END_SRC
 *** Font
 #+BEGIN_SRC emacs-lisp
-  (set-default-font "Source Code Pro" nil t)
-  ;(set-face-attribute 'default nil :family "Source Code Pro")
-  (set-face-attribute 'default nil :height 150)
+ (set-face-attribute 'default nil
+                      :family "Source Code Pro")
 #+END_SRC
 *** Prettify Symbols
 #+BEGIN_SRC emacs-lisp
@@ -139,9 +138,9 @@ Adaptive cursor width shows width of character, e.g. TAB. Via [[http://pragmatic
 *** Turn off unnecessary graphical features
 **** Tool Bar
 #+BEGIN_SRC emacs-lisp
-  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;;  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;;  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 #+END_SRC
 **** Startup Messages
 #+BEGIN_SRC emacs-lisp
@@ -1699,15 +1698,15 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
            ;("<down>" . org-insert-todo-heading)
            :map org-mode-map
            ("C-c >" . org-time-stamp-inactive))
-    :custom-face
-    (variable-pitch ((t (:family "ETBembo"))))
-    (org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
-    (org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
-    (org-headline-done ((t (:foreground "#171717" :strike-through t))))
-    (org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
-    (org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
-    (org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
-    (org-image-actual-width '(600))
+    ;;:custom-face
+    ;;(variable-pitch ((t (:family "ETBembo"))))
+    ;;(org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
+    ;;(org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
+    ;;(org-headline-done ((t (:foreground "#171717" :strike-through t))))
+    ;;(org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
+    ;;(org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
+    ;;(org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
+    ;;(org-image-actual-width '(600))
     :init
     (setq default-major-mode 'org-mode
           org-directory "~/org"
@@ -1772,10 +1771,11 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
                         'org-meta-line
                         'org-document-info-keyword))))
 
-    (custom-theme-set-faces
-     'spacemacs-light
-     `(org-block-begin-line ((t (:background "#fbf8ef"))))
-     `(org-block-end-line ((t (:background "#fbf8ef"))))))
+;;    (custom-theme-set-faces
+;;     'spacemacs-light
+;;     `(org-block-begin-line ((t (:background "#fbf8ef"))))
+;;     `(org-block-end-line ((t (:background "#fbf8ef")))))
+)
 #+END_SRC
 *** Packages
 **** org-modules
