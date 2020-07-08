@@ -114,11 +114,54 @@ These functions identify what operating system is hosting Emacs, which can be ha
 *** Theme
 Load spacemacs-light automatically on startup.
 #+BEGIN_SRC emacs-lisp
-  (use-package spacemacs-theme
-    :load-path "themes"
-    :defer t
-    :init
-    (load-theme 'spacemacs-light t))
+;;  (use-package spacemacs-theme
+;;    :load-path "themes"
+;;    :defer t
+;;    :init
+;;    (load-theme 'spacemacs-light t))
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-solarized-light t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+(use-package neotree
+    :after
+    projectile
+    :commands
+    (neotree-show neotree-hide neotree-dir neotree-find)
+    :custom
+    (neo-theme 'nerd2)
+    :bind
+    ("<f9>" . neotree-projectile-toggle)
+    :preface
+    (defun neotree-projectile-toggle ()
+      (interactive)
+      (let ((project-dir
+         (ignore-errors
+         ;;; Pick one: projectile or find-file-in-project
+           (projectile-project-root)
+           ))
+        (file-name (buffer-file-name))
+        (neo-smart-open t))
+    (if (and (fboundp 'neo-global--window-exists-p)
+         (neo-global--window-exists-p))
+        (neotree-hide)
+      (progn
+        (neotree-show)
+        (if project-dir
+        (neotree-dir project-dir))
+        (if file-name
+        (neotree-find file-name)))))))
 #+END_SRC
 *** Font
 #+BEGIN_SRC emacs-lisp
