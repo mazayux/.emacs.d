@@ -50,7 +50,8 @@ Use-package is a handful of things: you can make sure a package is downloaded, e
   (require 'package)
   (setq package-archives
         '(("gnu" . "https://elpa.gnu.org/packages/")
-          ("melpa" . "https://melpa.org/packages/")))
+          ("melpa" . "https://melpa.org/packages/")
+          ("org" . "https://orgmode.org/elpa/")))
   (setq load-prefer-newer t)
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -349,7 +350,6 @@ From Artur's article, "[[http://endlessparentheses.com/faster-pop-to-mark-comman
 #+END_SRC
 * Key Bindings
 Although keybindings are also located elsewhere, this section will aim to provide bindings that are not specific to any mode, package, or function.
-
 ** Text Expansion
 #+BEGIN_SRC emacs-lisp
   (bind-key "M-/" #'hippie-expand)
@@ -780,7 +780,6 @@ I prefer Ivy, Counsel, and Swiper, but I keep [[http://www.masteringemacs.org/ar
   (use-package counsel
       :bind (("C-x C-f" . counsel-find-file)
              ("C-x C-m" . counsel-M-x)
-             ("C-x C-f" . counsel-find-file)
              ("C-h f" . counsel-describe-function)
              ("C-h v" . counsel-describe-variable)
              ("M-i" . counsel-imenu)
@@ -1063,7 +1062,7 @@ Revert buffers automatically when underlying files are changed externally.
 I learned about save place from [[http://whattheemacsd.com/init.el-03.html][Magnars]]; if you close a buffer, it remembers where you were in the file, so that when you re-open that file the buffer goes straight to that place. The configuration of this mode is very simple as of Emacs 25.1.
 
 #+BEGIN_SRC emacs-lisp
-  (save-place-mode 1)
+(save-place-mode 1)
 #+END_SRC
 ** Regular Expressions
 Regexes are great. Not everyone knows them, and most user interfaces don't expose them, but I think most people who use computers could use them. Luckily, Emacs is great about this. It's easier to use them if you have good tools for noticing if your regular expressions match input.
@@ -1840,7 +1839,7 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
 **** org-modules
 #+BEGIN_SRC emacs-lisp
   (require 'org-install)
-  (setq org-modules '(org-habit org-info org-tempo))
+  (setq org-modules '(org-habit org-info org-tempo org-protocol))
   (org-load-modules-maybe t)
 #+END_SRC
 ***** org-habits
@@ -1926,6 +1925,12 @@ I wanted to be able to add a sort property to files or subtrees and get automati
                ("m" . yankpad-map)
                ("r" . yankpad-reload)
                ("x" . yankpad-expand)))
+#+END_SRC
+**** org-mac-link
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'org-modules 'mac-link)
+(add-hook 'org-mode-hook (lambda ()
+  (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 #+END_SRC
 *** Functionality
 **** Agendas
@@ -2125,7 +2130,7 @@ The first Emacs Lisp that I ever wrote was to configure my capture templates!
 
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
-        '(("t" "Todo [inbox]" entry (file "~/org/gtd/inbox.org")
+        '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/gtd.org" "Inbox")
            "* TODO %i%?")
          ("p" "Project" entry (file+headline "~/org/gtd/gtd.org" "Projects")
            (file "~/org/templates/newprojecttemplate.org"))
