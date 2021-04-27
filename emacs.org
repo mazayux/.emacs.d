@@ -600,8 +600,8 @@ All of my packages for interacting with my computer.
 **** Key Bindings
 #+BEGIN_SRC emacs-lisp
   (when (is-mac-p)
-    (setq mac-command-modifier 'meta
-          mac-option-modifier 'super
+    (setq mac-command-modifier 'super
+          mac-option-modifier 'meta
           mac-control-modifier 'control
           ns-function-modifier 'hyper))
 #+END_SRC
@@ -669,12 +669,7 @@ For me, Dired is one of Emacs' (less-heralded) killer apps, along with Org-Mode 
           dired-recursive-copies 'always
           dired-isearch-filenames t
           dired-listing-switches "-alh"
-          ;; dired-omit-files-p t
-          ;; dired-omit-files "\\|^.DS_STORE$\\|^.projectile$"
           )
-    (use-package dired+ :load-path "~/.emacs.d/dired+"
-      :init
-      (setq diredp-hide-details-initially-flag t)) ;; also automatically calls dired-x, enabling dired-jump, C-x C-j
     (use-package dired-details
       :disabled t
       :init
@@ -704,6 +699,9 @@ For me, Dired is one of Emacs' (less-heralded) killer apps, along with Org-Mode 
                  ("C-o C-d" . dired-subtree-only-this-directory)))
     (use-package dired-quick-sort
       :init
+      (setq insert-directory-program "gls" dired-use-ls-dired t)
+      :ensure t
+      :config
       (dired-quick-sort-setup))
     (use-package dired-collapse
       :hook dired-mode))
@@ -1134,11 +1132,6 @@ Edit List lets you edit a list variable as if it were a buffer.
   (use-package which-key
     :init
     (which-key-mode))
-#+END_SRC
-*** help-fns+
-#+BEGIN_SRC emacs-lisp
-  (use-package help-fns+ :load-path "~/.emacs.d/help-fns+"
-    :bind ("C-h M-k" . describe-keymap)) ; For autoloading.
 #+END_SRC
 *** discover-my-major
 #+BEGIN_SRC emacs-lisp
@@ -2418,6 +2411,7 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (ledger . t)
    (python . t)
    (shell . t)))
 #+END_SRC
@@ -2524,7 +2518,7 @@ Hit =C-c /= to run =pandoc-main-hydra/body=, the main entry point for =pandoc-mo
     (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
     :config
     (when (is-mac-p)
-      (add-to-list 'exec-path "/usr/local/texlive/2016basic/bin/universal-darwin")))
+      (add-to-list 'exec-path "/usr/local/texlive/2021/bin/x86_64-darwin")))
 #+END_SRC
 ** CSV
 #+BEGIN_SRC emacs-lisp
@@ -2542,6 +2536,17 @@ Hit =C-c /= to run =pandoc-main-hydra/body=, the main entry point for =pandoc-mo
                 ("c" . copy-whole-buffer))
     :init
     (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+#+END_SRC
+** Ledger-cli
+#+BEGIN_SRC emacs-lisp
+(use-package ledger-mode
+    :mode ("\\.dat\\'"
+           "\\.ledger\\'")
+    :custom (ledger-clear-whole-transactions t))
+
+  (use-package flycheck-ledger
+  :config
+  (add-hook 'ledger-mode-hook 'flycheck-mode))
 #+END_SRC
 * Organization (GTD and PARA)
 ** Projects
@@ -2696,7 +2701,7 @@ I use mwf-init-file rather than user-init-file, because I edit the config file i
   (defun find-init-file ()
     "Edit my init file in another window."
     (interactive)
-    (let ((mwf-init-file "~/src/.emacs.d/emacs.org"))
+    (let ((mwf-init-file "~/.emacs.d/emacs.org"))
       (find-file mwf-init-file)))
 
   (bind-key "C-c I" 'find-init-file)

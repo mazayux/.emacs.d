@@ -6,12 +6,10 @@
  '(ansi-color-names-vector
    ["#222222" "#aa4450" "#87875f" "#cc8800" "#87AFD7" "#8787AF" "#87ceeb" "#c2c2b0"])
  '(custom-safe-themes
-   (quote
-    ("285efd6352377e0e3b68c71ab12c43d2b72072f64d436584f9159a58c4ff545a" "f9cae16fd084c64bf0a9de797ef9caedc9ff4d463dd0288c30a3f89ecf36ca7e" default)))
+   '("285efd6352377e0e3b68c71ab12c43d2b72072f64d436584f9159a58c4ff545a" "f9cae16fd084c64bf0a9de797ef9caedc9ff4d463dd0288c30a3f89ecf36ca7e" default))
  '(fci-rule-color "#62686E")
  '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . "#dc752f")
+   '(("TODO" . "#dc752f")
      ("NEXT" . "#dc752f")
      ("THEM" . "#2d9574")
      ("PROG" . "#3a81c3")
@@ -25,14 +23,13 @@
      ("TEMP" . "#b1951d")
      ("FIXME" . "#dc752f")
      ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f"))))
+     ("\\?\\?\\?+" . "#dc752f")))
  '(jdee-db-active-breakpoint-face-colors (cons "#1d2127" "#87ceeb"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1d2127" "#87875f"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1d2127" "#686858"))
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
-   (quote
-    (org-kanban pcmpl-git git-link git-timemachine aggressive-indent comment-dwim-2 linum-relative smartparens restclient flycheck-clojure ibuffer-projectile projectile git-auto-commit-mode elisp-slime-nav align-cljlet cider clojure-mode eww-lnum emojify beginend selected goto-chg interaction-log discover-my-major help-fns+ which-key edit-list iedit highlight-symbol visual-regexp hungry-delete easy-kill browse-kill-ring expand-region ace-link avy-zap ace-window avy smex flx-ido ido-vertical-mode ivy-rich counsel zoom deadgrep dired-collapse dired-quick-sort dired-subtree dired-filter dired+ f esh-autosuggest counsel-osx-app yaml-mode use-package spacemacs-theme solarized-theme smart-mode-line rainbow-delimiters py-autopep8 paradox osx-clipboard org-caldav magit-popup magit groovy-mode go-guru go-eldoc go-add-tags flycheck fill-column-indicator exec-path-from-shell elpy ein doom-themes cyberpunk-theme company-go better-defaults all-the-icons)))
+   '(ivy-posframe org-kanban pcmpl-git git-link git-timemachine aggressive-indent comment-dwim-2 linum-relative smartparens restclient flycheck-clojure ibuffer-projectile projectile git-auto-commit-mode elisp-slime-nav align-cljlet cider clojure-mode eww-lnum emojify beginend selected goto-chg interaction-log discover-my-major help-fns+ which-key edit-list iedit highlight-symbol visual-regexp hungry-delete easy-kill browse-kill-ring expand-region ace-link avy-zap ace-window avy smex flx-ido ido-vertical-mode ivy-rich counsel zoom deadgrep dired-collapse dired-quick-sort dired-subtree dired-filter dired+ f esh-autosuggest counsel-osx-app yaml-mode use-package spacemacs-theme solarized-theme smart-mode-line rainbow-delimiters py-autopep8 paradox osx-clipboard org-caldav magit-popup magit groovy-mode go-guru go-eldoc go-add-tags flycheck fill-column-indicator exec-path-from-shell elpy ein doom-themes cyberpunk-theme company-go better-defaults all-the-icons))
  '(pdf-view-midnight-colors (cons "#c2c2b0" "#222222"))
  '(rustic-ansi-faces
    ["#222222" "#aa4450" "#87875f" "#cc8800" "#87AFD7" "#8787AF" "#87ceeb" "#c2c2b0"])
@@ -66,7 +63,7 @@
  '(org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
  '(org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
  '(org-headline-done ((t (:foreground "#171717" :strike-through t))))
- '(org-image-actual-width (quote (600)))
+ '(org-image-actual-width '(600))
  '(org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
  '(org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
  '(org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
