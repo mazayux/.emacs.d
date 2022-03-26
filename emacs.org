@@ -1836,7 +1836,7 @@ The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/
   (setq org-modules '(org-habit org-info org-tempo org-protocol))
   (org-load-modules-maybe t)
 #+END_SRC
-***** org-habits
+**** org-habits
 I use the [[http://orgmode.org/manual/Tracking-your-habits.html][org-habits]] module.
 
 #+BEGIN_SRC emacs-lisp
@@ -1950,12 +1950,14 @@ I wanted to be able to add a sort property to files or subtrees and get automati
       (let ((org-super-agenda-groups
              '((:name "Schedule"
                       :time-grid t)
-               (:name "MAPLE" ;; monastery work
-                      :tag "maple")
+             (:name "Tasks to Refile" ;; Office work
+                    :tag "REFILE")
+             (:name "Amazon" ;; Office work
+                    :tag "@office")
                ;; After the last group, the agenda will display items that didn't
                ;; match any of these groups, with the default order position of 99
                ;; To prevent this, add this code:
-               ;; (:discard (:anything t))
+               ;;(:discard (:anything t))
                )))
         (org-agenda nil "a")))
 
@@ -1971,15 +1973,15 @@ I wanted to be able to add a sort property to files or subtrees and get automati
              '(;; After the last group, the agenda will display items that didn't
                ;; match any of these groups, with the default order position of 99
                ;; To prevent this, add this code:
-               (:discard (:tag ("maple"))))))
+               (:discard (:tag ("@office"))))))
         (org-agenda nil "a")
         (org-agenda-day-view)))
 
-    (defun my-monastery-agenda ()
+    (defun my-amazon-agenda ()
       (interactive)
       (let ((org-super-agenda-groups
-             '((:name "MAPLE" ;; monastery work
-                      :tag "maple")
+             '((:name "Amazon" ;; office work
+                      :tag "@office")
                ;; After the last group, the agenda will display items that didn't
                ;; match any of these groups, with the default order position of 99
                ;; To prevent this, add this code:
@@ -1989,7 +1991,7 @@ I wanted to be able to add a sort property to files or subtrees and get automati
 
     (bind-keys ("C-c `" . my-org-super-agenda-today)
                ("C-c 1" . my-personal-agenda)
-               ("C-c 2" . my-monastery-agenda)
+               ("C-c 2" . my-amazon-agenda)
                ("C-c 0" . my-org-super-agenda))
 
     :config
@@ -1999,17 +2001,14 @@ I wanted to be able to add a sort property to files or subtrees and get automati
                   ("TAB" . origami-toggle-node))
       :hook ((org-agenda-mode . origami-mode))))
 #+END_SRC
+
 ***** Agenda Files
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (quote (;"~/org/todo.org"
-                                 ;"~/org/agendas.org"
+  (setq org-agenda-files (quote ("~/org/gtd/gtd.org"
                                  "~/org/gtd/inbox.org"
-                                 "~/org/gtd/gtd.org"
-                                 "~/org/gtd/tickler.org"
-                                 ;"~/org/waiting.org"
-                                 ;"~/org/calendar/gcal.org"
-                                 ;"~/org/calendar/maple.org"
-                                 "~/org/gtd/someday.org")))
+                                 ;"~/org/gtd/tickler.org"
+                                 ;"~/org/gtd/someday.org"
+                                 )))
   (setq org-mobile-files org-agenda-files)
 #+END_SRC
 ***** Open Org Agenda
@@ -2039,29 +2038,28 @@ Agendas should be full screen!
 Here are some hand-made agenda files.
 
 #+BEGIN_SRC emacs-lisp
-  (defun org-buffer-todo ()
-    (interactive)
-    "Creates a todo-list for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), t (todo-list)."
-    (progn
-      (org-agenda-set-restriction-lock 'file)
-      (org-todo-list)))
+      (defun org-buffer-todo ()
+        (interactive)
+        "Creates a todo-list for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), t (todo-list)."
+        (progn
+          (org-agenda-set-restriction-lock 'file)
+          (org-todo-list)))
 
-  (defun org-buffer-agenda ()
-    (interactive)
-    "Creates an agenda for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), a (agenda-list)."
-    (progn
-      (org-agenda-set-restriction-lock 'file)
-      (org-agenda-list)))
+      (defun org-buffer-agenda ()
+        (interactive)
+        "Creates an agenda for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), a (agenda-list)."
+        (progn
+          (org-agenda-set-restriction-lock 'file)
+          (org-agenda-list)))
 
-  (defun org-buffer-day-agenda ()
-    (interactive)
-    "Creates an agenda for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), a (agenda-list), d (org-agenda-day-view)."
-    (progn
-      (org-agenda-set-restriction-lock 'file)
-      (org-agenda-list)
-      (org-agenda-day-view))) ;; Maybe I should try writing a Emacs Lisp macro for this kind of thing!
-
-  (bind-key "y" 'org-agenda-todo-yesterday org-agenda-mode-map)
+      (defun org-buffer-day-agenda ()
+        (interactive)
+        "Creates an agenda for the current buffer. Equivalent to the sequence: org-agenda, < (restrict to current buffer), a (agenda-list), d (org-agenda-day-view)."
+        (progn
+          (org-agenda-set-restriction-lock 'file)
+          (org-agenda-list)
+          (org-agenda-day-view))) ;; Maybe I should try writing a Emacs Lisp macro for this kind of thing!
+      (bind-key "y" 'org-agenda-todo-yesterday org-agenda-mode-map)
 #+END_SRC
 ****** Timeline
 The org-timeline functionality was recently removed. This code, adapted from [[https://www.reddit.com/r/orgmode/comments/7hps9j/rip_orgtimeline/dqt4pfs/][a comment on Reddit]], adds similar functionality back.
@@ -2084,30 +2082,36 @@ The org-timeline functionality was recently removed. This code, adapted from [[h
 #+END_SRC
 ****** [[https://www.reddit.com/r/orgmode/comments/7kddjq/org_agenda_view_for_scheduled_events_t_2/][Open Loops]]
 Thanks Sacha for this custom code!
-
 #+BEGIN_SRC emacs-lisp
-  (defun my-org-agenda-recent-open-loops ()
-    (interactive)
-    (let ((org-agenda-start-with-log-mode t)
-          (org-agenda-use-time-grid nil)
-          (org-agenda-files '("~/org/calendar/gcal.org" "~/org/calendar/maple.org")))
-      (fetch-calendar)
-      (org-agenda-list nil (org-read-date nil nil "-2d") 4)
-      (beginend-org-agenda-mode-goto-beginning)))
-
-  (defun my-org-agenda-longer-open-loops ()
-    (interactive)
-    (let ((org-agenda-start-with-log-mode t)
-          (org-agenda-use-time-grid nil)
-          (org-agenda-files '("~/org/calendar/gcal.org" "~/org/calendar/maple.org")))
-      (fetch-calendar)
-      (org-agenda-list 'file (org-read-date nil nil "-14d") 28)
-      (beginend-org-agenda-mode-goto-beginning)))
+(add-to-list 'org-agenda-custom-commands
+             '("o" "Open loops" agenda ""
+               ((org-agenda-start-day "-2d")
+                (org-agenda-span 4)
+                (org-agenda-start-with-log-mode t))))
 #+END_SRC
 ****** Delegated and Waiting Tasks
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-agenda-custom-commands
                '("w" "WAITING" todo "WAITING" ((org-agenda-overriding-header "Delegated and/or Waiting"))) t)
+#+END_SRC
+****** Tasks to Archive
+#+BEGIN_SRC emacs-lisp
+    (add-to-list 'org-agenda-custom-commands
+                 '("A" "Tasks to Archive"
+                   ((tags "-REFILE/"
+                          ((org-agenda-overriding-header "Tasks to Archive")
+                           (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
+                           (org-tags-match-list-sublevels nil)
+                           )))))
+#+END_SRC
+****** Tasks to Refile
+#+BEGIN_SRC emacs-lisp
+    (add-to-list 'org-agenda-custom-commands
+                 '("r" "Tasks to Refile"
+                   ((tags "REFILE"
+                          ((org-agenda-overriding-header "Tasks to Archive")
+                           (org-tags-match-list-sublevels nil)
+                           )))))
 #+END_SRC
 ***** Auto Advance
 #+BEGIN_SRC emacs-lisp
@@ -2124,7 +2128,7 @@ The first Emacs Lisp that I ever wrote was to configure my capture templates!
 
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
-        '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/gtd.org" "Inbox")
+        '(("t" "Todo" entry (file "~/org/gtd/inbox.org")
            "* TODO %i%?")
          ("p" "Project" entry (file+headline "~/org/gtd/gtd.org" "Projects")
            (file "~/org/templates/newprojecttemplate.org"))
@@ -2210,7 +2214,6 @@ However, there are a *lot* of commands for clocking; this is a perfect instance 
 #+END_SRC
 **** Exporting
 I often want to export Org-Mode documents into other formats. This section contains some defaults and packages that have made that workflow easier for me.
-
 ***** Export Defaults
 Org's export defaults to inserting a TOC and using section numbers, but usually I don't want or need those things. (It can make delieverables more attractive, though, so I make sure to put a hint in here to remind me about how to change that on a file-by-file basis.)
 
@@ -2331,9 +2334,9 @@ This function comes from [[http://kitchingroup.cheme.cmu.edu/blog/2016/03/18/Org
 
 **** Refiling
 #+BEGIN_SRC emacs-lisp
-(setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-                           ("~/org/gtd/someday.org" :level . 1)
-                           ("~/org/gtd/tickler.org" :maxlevel . 2)
+(setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 5)
+                           ("~/org/gtd/someday.org" :level . 5)
+                           ("~/org/gtd/tickler.org" :maxlevel . 3)
                            ("~/org/gtd/inbox.org" :maxlevel . 1))
                            ;; org-refile-use-cache t
                            org-refile-use-outline-path t)
@@ -2406,6 +2409,37 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
                         ("crypt" . ?c)
                         ))
 #+END_SRC
+**** Archiving
+Task can just archive normally to the Archive heading in the archive file
+#+BEGIN_SRC emacs-lisp
+    (setq org-archive-mark-done nil)
+    (setq org-archive-location "%s_archive::* Archived Tasks")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+ (defun bh/skip-non-archivable-tasks ()
+  "Skip trees that are not available for archiving"
+  (save-restriction
+    (widen)
+    ;; Consider only tasks with done todo headings as archivable candidates
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
+          (subtree-end (save-excursion (org-end-of-subtree t))))
+      (if (member (org-get-todo-state) org-todo-keywords-1)
+          (if (member (org-get-todo-state) org-done-keywords)
+              (let* ((daynr (string-to-number (format-time-string "%d" (current-time))))
+                     (a-month-ago (* 60 60 24 (+ daynr 1)))
+                     (last-month (format-time-string "%Y-%m-" (time-subtract (current-time) (seconds-to-time a-month-ago))))
+                     (this-month (format-time-string "%Y-%m-" (current-time)))
+                     (subtree-is-current (save-excursion
+                                           (forward-line 1)
+                                           (and (< (point) subtree-end)
+                                                (re-search-forward (concat last-month "\\|" this-month) subtree-end t)))))
+                (if subtree-is-current
+                    subtree-end ; Has a date in this month or last month, skip it
+                  nil))  ; available to archive
+            (or subtree-end (point-max)))
+        next-headline))))
+#+END_SRC
 *** Other
 **** Shell in Org Source Blocks
 #+BEGIN_SRC emacs-lisp
@@ -2424,7 +2458,7 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
 #+BEGIN_SRC emacs-lisp
   (defun open-todo-file ()
     (interactive)
-    (find-file "~/org/todo.org"))
+    (find-file "~/org/gtd/todo.org"))
 
   (bind-key "C-c t" 'open-todo-file)
 #+END_SRC
