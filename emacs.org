@@ -1721,119 +1721,119 @@ My settings for capture were some of my first Elisp :) I did need, and still nee
 The theming for Org-Mode is derived from [[https://lepisma.github.io/2017/10/28/ricing-org-mode/][Ricing up Org Mode]] with help from folks on [[https://www.reddit.com/r/emacs/comments/9m22lw/ricing_org_mode_with_spacemacs/][Reddit]]. Be sure to download the fonts [[https://github.com/edwardtufte/et-book/tree/gh-pages/et-book][here]].
 
 #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :bind (("C-c l" . org-store-link)
-               ("C-c c" . org-capture)
-               ("C-c a" . org-agenda)
-               ("C-c b" . org-iswitchb)
-               ("C-c M-k" . org-cut-subtree)
-               ;("<down>" . org-insert-todo-heading)
-               :map org-mode-map
-               ("C-c >" . org-time-stamp-inactive))
-        ;;:custom-face
-        ;;(variable-pitch ((t (:family "ETBembo"))))
-        ;;(org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
-        ;;(org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
-        ;;(org-headline-done ((t (:foreground "#171717" :strike-through t))))
-        ;;(org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
-        ;;(org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
-        ;;(org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
-        ;;(org-image-actual-width '(600))
-        :init
-        (setq default-major-mode 'org-mode
-              org-directory "~/org"
-              org-log-done t
-              org-startup-indented t
-              org-startup-folded t
-              org-startup-truncated nil
-              org-startup-with-inline-images t
-              org-completion-use-ido t
-              org-default-notes-file "~/org/gtd/inbox.org"
-              org-image-actual-width '(300)
-              org-goto-max-level 10
-              org-imenu-depth 5
-              org-goto-interface 'outline-path-completion
-              org-outline-path-complete-in-steps nil
-              org-src-fontify-natively t
-              org-lowest-priority ?C
-              org-default-priority ?B
-              org-expiry-inactive-timestamps t
-              org-show-notification-handler 'message
-              org-special-ctrl-a/e t
-              org-special-ctrl-k t
-              org-yank-adjusted-subtrees t
-              org-file-apps
-              '((auto-mode . emacs)
-                ("\\.mm\\'" . default)
-                ("\\.x?html?\\'" . "firefox %s")
-                ("\\.pdf\\'" . "open %s"))
-              org-todo-keywords
-              '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-             (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))
-              org-todo-keyword-faces
-              '(("TODO" :foreground "red" :weight bold)
-                  ("NEXT" :foreground "light blue" :weight bold)
-                  ("DONE" :foreground "forest green" :weight bold)
-                  ("WAITING" :foreground "orange" :weight bold)
-                  ("HOLD" :foreground "magenta" :weight bold)
-                  ("CANCELLED" :foreground "forest green" :weight bold)
-                  ("MEETING" :foreground "forest green" :weight bold)
-                  ("PHONE" :foreground "forest green" :weight bold))
-              ;; Theming
-              org-ellipsis "  " ;; folding symbol
-              org-pretty-entities t
-              org-hide-emphasis-markers t ;; show actually italicized text instead of /italicized text/
-              org-agenda-block-separator ""
-              org-fontify-whole-heading-line t
-              org-fontify-done-headline t
-              org-fontify-quote-and-verse-blocks t
-              ;; org-icalendar
-              org-export-exclude-tags '("noexport" "private")
-              org-icalendar-alarm-time 60
-              org-icalendar-combined-agenda-file (expand-file-name "agenda.ics" org-directory)
-              org-icalendar-exclude-tags (append org-export-exclude-tags '("archive" "journal"))
-              ;; Include tasks that are not in DONE state.
-              org-icalendar-include-todo t
-              ;; Include scheduled and deadline events.
-              org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
-              org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
-              ;; Whether to make events from plain time stamps.
-              org-icalendar-with-timestamps 'active
-              ;; Mobile Org
-              org-mobile-inbox-for-pull  "~/org/gtd/inbox.org" ;; Set to the name of the file where new notes will be stored
-              org-mobile-directory "~/Dropbox/Apps/MobileOrg") ;; Set to <your Dropbox root directory>/MobileOrg.
+    (use-package org
+      :bind (("C-c l" . org-store-link)
+             ("C-c c" . org-capture)
+             ("C-c a" . org-agenda)
+             ("C-c b" . org-iswitchb)
+             ("C-c M-k" . org-cut-subtree)
+             ;("<down>" . org-insert-todo-heading)
+             :map org-mode-map
+             ("C-c >" . org-time-stamp-inactive))
+      ;;:custom-face
+      ;;(variable-pitch ((t (:family "ETBembo"))))
+      ;;(org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
+      ;;(org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
+      ;;(org-headline-done ((t (:foreground "#171717" :strike-through t))))
+      ;;(org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
+      ;;(org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
+      ;;(org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
+      ;;(org-image-actual-width '(600))
+      :init
+      (setq default-major-mode 'org-mode
+            org-directory "~/org"
+            org-log-done t
+            org-startup-indented t
+            org-startup-folded t
+            org-startup-truncated nil
+            org-startup-with-inline-images t
+            org-completion-use-ido t
+            org-default-notes-file "~/org/gtd/inbox.org"
+            org-image-actual-width '(300)
+            org-goto-max-level 10
+            org-imenu-depth 5
+            org-goto-interface 'outline-path-completion
+            org-outline-path-complete-in-steps nil
+            org-src-fontify-natively t
+            org-lowest-priority ?C
+            org-default-priority ?B
+            org-expiry-inactive-timestamps t
+            org-show-notification-handler 'message
+            org-special-ctrl-a/e t
+            org-special-ctrl-k t
+            org-yank-adjusted-subtrees t
+            org-file-apps
+            '((auto-mode . emacs)
+              ("\\.mm\\'" . default)
+              ("\\.x?html?\\'" . "firefox %s")
+              ("\\.pdf\\'" . "open %s"))
+            org-todo-keywords
+            '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+           (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))
+            org-todo-keyword-faces
+            '(("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "light blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold)
+                ("MEETING" :foreground "forest green" :weight bold)
+                ("PHONE" :foreground "forest green" :weight bold))
+            ;; Theming
+            org-ellipsis "  " ;; folding symbol
+            org-pretty-entities t
+            org-hide-emphasis-markers t ;; show actually italicized text instead of /italicized text/
+            org-agenda-block-separator ""
+            org-fontify-whole-heading-line t
+            org-fontify-done-headline t
+            org-fontify-quote-and-verse-blocks t
+            ;; org-icalendar
+            org-export-exclude-tags '("noexport" "private")
+            org-icalendar-alarm-time 60
+            org-icalendar-combined-agenda-file (expand-file-name "agenda.ics" org-directory)
+            org-icalendar-exclude-tags (append org-export-exclude-tags '("archive" "journal"))
+            ;; Include tasks that are not in DONE state.
+            org-icalendar-include-todo t
+            ;; Include scheduled and deadline events.
+            org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
+            org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
+            ;; Whether to make events from plain time stamps.
+            org-icalendar-with-timestamps 'active
+            ;; Mobile Org
+            org-mobile-inbox-for-pull  "~/org/gtd/inbox.org" ;; Set to the name of the file where new notes will be stored
+            org-mobile-directory "~/Dropbox/Apps/MobileOrg") ;; Set to <your Dropbox root directory>/MobileOrg.
 
-        (add-to-list 'org-global-properties
-                     '("Effort_ALL". "0:05 0:15 0:30 1:00 2:00 3:00 4:00"))
+      (add-to-list 'org-global-properties
+                   '("Effort_ALL". "0:05 0:15 0:30 1:00 2:00 3:00 4:00"))
 
-        (add-hook 'org-mode-hook
-                  '(lambda ()
-                     (setq line-spacing 0.2) ;; Add more line padding for readability
-                     (variable-pitch-mode 1) ;; All fonts with variable pitch.
-                     (mapc
-                      (lambda (face) ;; Other fonts with fixed-pitch.
-                        (set-face-attribute face nil :inherit 'fixed-pitch))
-                      (list 'org-code
-                            'org-link
-                            'org-block
-                            'org-table
-                            'org-verbatim
-                            'org-block-begin-line
-                            'org-block-end-line
-                            'org-meta-line
-                            'org-document-info-keyword))))
+      (add-hook 'org-mode-hook
+                (lambda ()
+                   (setq line-spacing 0.2) ;; Add more line padding for readability
+                   (variable-pitch-mode 1) ;; All fonts with variable pitch.
+                   (mapc
+                    (lambda (face) ;; Other fonts with fixed-pitch.
+                      (set-face-attribute face nil :inherit 'fixed-pitch))
+                    (list 'org-code
+                          'org-link
+                          'org-block
+                          'org-table
+                          'org-verbatim
+                          'org-block-begin-line
+                          'org-block-end-line
+                          'org-meta-line
+                          'org-document-info-keyword))))
 
-    ;;    (custom-theme-set-faces
-    ;;     'spacemacs-light
-    ;;     `(org-block-begin-line ((t (:background "#fbf8ef"))))
-    ;;     `(org-block-end-line ((t (:background "#fbf8ef")))))
-    )
+  ;;    (custom-theme-set-faces
+  ;;     'spacemacs-light
+  ;;     `(org-block-begin-line ((t (:background "#fbf8ef"))))
+  ;;     `(org-block-end-line ((t (:background "#fbf8ef")))))
+  )
 #+END_SRC
 *** Packages
 **** org-modules
 #+BEGIN_SRC emacs-lisp
   (require 'org-install)
-  (setq org-modules '(org-habit org-info org-tempo org-protocol))
+  (setq org-modules '(org-habit org-tempo org-protocol))
   (org-load-modules-maybe t)
 #+END_SRC
 **** org-habits
@@ -2266,72 +2266,6 @@ By using unique ID's for links in Org-mode, links will work even if you move the
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
         org-clone-delete-id t)
 #+END_SRC
-**** Movement (org-teleport)
-This function comes from [[http://kitchingroup.cheme.cmu.edu/blog/2016/03/18/Org-teleport-headlines/][John Kitchin]].
-
-#+BEGIN_SRC emacs-lisp
-  (defun org-teleport (&optional arg)
-    "Teleport the current heading to after a headline selected with avy.
-    With a prefix ARG move the headline to before the selected
-    headline. With a numeric prefix, set the headline level. If ARG
-    is positive, move after, and if negative, move before."
-    (interactive "P")
-    ;; Kill current headline
-    (org-mark-subtree)
-    (kill-region (region-beginning) (region-end))
-    ;; Jump to a visible headline
-    (avy-with avy-goto-line (avy--generic-jump "^\\*+" nil avy-style))
-    (cond
-     ;; Move before  and change headline level
-     ((and (numberp arg) (> 0 arg))
-      (save-excursion
-        (yank))
-      ;; arg is what we want, second is what we have
-      ;; if n is positive, we need to demote (increase level)
-      (let ((n (- (abs arg) (car (org-heading-components)))))
-        (cl-loop for i from 1 to (abs n)
-                 do
-                 (if (> 0 n)
-                     (org-promote-subtree)
-                   (org-demote-subtree)))))
-     ;; Move after and change level
-     ((and (numberp arg) (< 0 arg))
-      (org-mark-subtree)
-      (goto-char (region-end))
-      (when (eobp) (insert "\n"))
-      (save-excursion
-        (yank))
-      ;; n is what we want and second is what we have
-      ;; if n is positive, we need to demote
-      (let ((n (- (abs arg) (car (org-heading-components)))))
-        (cl-loop for i from 1 to (abs n)
-                 do
-                 (if (> 0 n) (org-promote-subtree)
-                   (org-demote-subtree)))))
-
-     ;; move to before selection
-     ((equal arg '(4))
-      (save-excursion
-        (yank)))
-     ;; move to after selection
-     (t
-      (org-mark-subtree)
-      (goto-char (region-end))
-      (when (eobp) (insert "\n"))
-      (save-excursion
-        (yank))))
-    (outline-hide-leaves))
-
-  (add-to-list 'org-speed-commands-user
-               (cons "q" (lambda ()
-                           (avy-with avy-goto-line
-                             (avy--generic-jump "^\\*+" nil avy-style)))))
-
-  (add-to-list 'org-speed-commands-user (cons "T" 'org-teleport))
-
-  (bind-key "T" 'org-teleport selected-org-mode-map)
-#+END_SRC
-
 **** Refiling
 #+BEGIN_SRC emacs-lisp
 (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 5)
@@ -2394,7 +2328,7 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
                         ("@immersive" . ?i) ;; "Deep"
                         ("@process" . ?p) ;; "Shallow"
                         ;; Context
-                        ("@office" . ?o)
+                        ("@work" . ?w)
                         ("@home" . ?h)
                         ("@errand" . ?e)
                         ;; Time
@@ -2446,7 +2380,6 @@ Task can just archive normally to the Archive heading in the archive file
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (ledger . t)
    (python . t)
    (shell . t)))
 #+END_SRC
