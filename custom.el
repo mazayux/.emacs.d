@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#222222" "#aa4450" "#87875f" "#cc8800" "#87AFD7" "#8787AF" "#87ceeb" "#c2c2b0"])
+ '(canlock-password "251084809d0a47922bd12ceedb6052320a982020")
  '(custom-safe-themes
    '("285efd6352377e0e3b68c71ab12c43d2b72072f64d436584f9159a58c4ff545a" "f9cae16fd084c64bf0a9de797ef9caedc9ff4d463dd0288c30a3f89ecf36ca7e" default))
  '(fci-rule-color "#62686E")
@@ -27,6 +28,8 @@
  '(jdee-db-active-breakpoint-face-colors (cons "#1d2127" "#87ceeb"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1d2127" "#87875f"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1d2127" "#686858"))
+ '(mml-secure-openpgp-sign-with-sender t)
+ '(mml-secure-smime-sign-with-sender t)
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
    '(ivy-posframe org-kanban pcmpl-git git-link git-timemachine aggressive-indent comment-dwim-2 linum-relative smartparens restclient flycheck-clojure ibuffer-projectile projectile git-auto-commit-mode elisp-slime-nav align-cljlet cider clojure-mode eww-lnum emojify beginend selected goto-chg interaction-log discover-my-major help-fns+ which-key edit-list iedit highlight-symbol visual-regexp hungry-delete easy-kill browse-kill-ring expand-region ace-link avy-zap ace-window avy smex flx-ido ido-vertical-mode ivy-rich counsel zoom deadgrep dired-collapse dired-quick-sort dired-subtree dired-filter dired+ f esh-autosuggest counsel-osx-app yaml-mode use-package spacemacs-theme solarized-theme smart-mode-line rainbow-delimiters py-autopep8 paradox osx-clipboard org-caldav magit-popup magit groovy-mode go-guru go-eldoc go-add-tags flycheck fill-column-indicator exec-path-from-shell elpy ein doom-themes cyberpunk-theme company-go better-defaults all-the-icons))
