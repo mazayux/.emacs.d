@@ -1,5 +1,5 @@
 #+TITLE: Mazay Jimenez's Emacs configuration
-#+OPTIONS: toc:4 h:4
+#+OPTIONS: toc:4 h:4s
 
 * Introduction
 * Settings
@@ -563,14 +563,14 @@ All of my packages for interacting with my computer.
 **** Key Bindings
 #+BEGIN_SRC emacs-lisp
         (when (is-mac-p)
-          (setq mac-option-key-is-meta nil
-                mac-command-key-is-meta t
-                mac-command-modifier 'meta
-                mac-option-modifier nil))
-        ;;  (setq mac-command-modifier 'super
-        ;;        mac-option-modifier 'meta
-        ;;        mac-control-modifier 'control
-        ;;        ns-function-modifier 'hyper))
+        ;;  (setq mac-option-key-is-meta nil
+        ;;        mac-command-key-is-meta t
+        ;;        mac-command-modifier 'meta
+        ;;        mac-option-modifier nil))
+          (setq mac-command-modifier 'super
+                mac-option-modifier 'meta
+                mac-control-modifier 'control
+                ns-function-modifier 'hyper))
 #+END_SRC
 **** Face Attributes
 #+BEGIN_SRC emacs-lisp
@@ -684,6 +684,11 @@ Dired-details lets me show or hide the details with ) and (, respectively. If, f
            ("C-c D" . counsel-rg)
            (:map deadgrep-mode-map
                  ("q" . kill-this-buffer))))
+#+END_SRC
+** f package
+#+BEGIN_SRC emacs-lisp
+  (use-package f
+    :ensure t)
 #+END_SRC
 * Emacs
 These are helper packages that make Emacs even more awesome.
@@ -1197,11 +1202,11 @@ Here are language-specific (largely Lisps) or development-related packages.
 ** Programming Languages
 *** Yaml mode
 #+BEGIN_SRC emacs-lisp
-  (use-package yaml-mode
-    :ensure t
-    :mode ("\\.\\(yaml\\|yml\\)\\'")
-    :config (add-hook 'yaml-mode-hook
-                     (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+    (use-package yaml-mode
+      :ensure t
+      :mode ("\\.\\(yaml\\|yml\\)\\'")
+      :config (add-hook 'yaml-mode-hook
+                      (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 #+END_SRC
 ** Development Tools
 *** Version Control (Git)
@@ -2443,49 +2448,50 @@ This function creates an agenda of stuck projects that is restricted to my "Proj
 #+END_SRC
 ** Reviews
 #+BEGIN_SRC emacs-lisp
-  (defun my-new-daily-review ()
-    (interactive)
-    (let ((org-capture-templates '(("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/reviews.org")
-                                    (file "~/org/templates/dailyreviewtemplate.org")))))
-      (progn
-        (org-capture nil "d")
-        (org-capture-finalize t)
-        (org-speed-move-safe 'outline-up-heading)
-        (org-narrow-to-subtree)
-        (fetch-calendar)
-        (org-clock-in))))
+    (defun my-new-daily-review ()
+      (interactive)
+      (let ((org-capture-templates '(("d" "Review: Daily Review" entry (file+olp+datetree "~/org/tmp/reviews.org")
+                                      (file "~/org/templates/dailyreviewtemplate.org")))))
+        (progn
+          (org-capture nil "d")
+          (org-capture-finalize t)
+          (org-speed-move-safe 'outline-up-heading)
+          (org-narrow-to-subtree)
+          (fetch-calendar)
+          (org-clock-in))))
 
-  (defun my-new-weekly-review ()
-    (interactive)
-    (let ((org-capture-templates '(("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/reviews.org")
-                                    (file "~/org/templates/weeklyreviewtemplate.org")))))
-      (progn
-        (org-capture nil "w")
-        (org-capture-finalize t)
-        (org-speed-move-safe 'outline-up-heading)
-        (org-narrow-to-subtree)
-        (fetch-calendar)
-        (org-clock-in))))
+    (defun my-new-weekly-review ()
+      (interactive)
+      (let ((org-capture-templates '(("w" "Review: Weekly Review" entry (file+olp+datetree "~/org/tmp/reviews.org")
+                                      (file "~/org/templates/weeklyreviewtemplate.org")))))
+        (progn
+          (org-capture nil "w")
+          (org-capture-finalize t)
+          (org-speed-move-safe 'outline-up-heading)
+          (org-narrow-to-subtree)
+          (fetch-calendar)
+          (org-clock-in))))
 
-  (defun my-new-monthly-review ()
-    (interactive)
-    (let ((org-capture-templates '(("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
-                                    (file "~/org/templates/monthlyreviewtemplate.org")))))
-      (progn
-        (org-capture nil "m")
-        (org-capture-finalize t)
-        (org-speed-move-safe 'outline-up-heading)
-        (org-narrow-to-subtree)
-        (fetch-calendar)
-        (org-clock-in))))
+    (defun my-new-monthly-review ()
+      (interactive)
+      (let ((org-capture-templates '(("m" "Review: Monthly Review" entry (file+olp+datetree "~/org/tmp/reviews.org")
+                                      (file
+                                     "~/org/templates/monthlyreviewtemplate.org")))))
+        (progn
+          (org-capture nil "m")
+          (org-capture-finalize t)
+          (org-speed-move-safe 'outline-up-heading)
+          (org-narrow-to-subtree)
+          (fetch-calendar)
+          (org-clock-in))))
 
-  (bind-keys :prefix-map review-map
-             :prefix "C-c r"
-             ("d" . my-new-daily-review)
-             ("w" . my-new-weekly-review)
-             ("m" . my-new-monthly-review))
+    (bind-keys :prefix-map review-map
+               :prefix "C-c r"
+               ("d" . my-new-daily-review)
+               ("w" . my-new-weekly-review)
+               ("m" . my-new-monthly-review))
 
-  (f-touch "/tmp/reviews.org")
+    (f-touch "~/org/tmp/reviews.org")
 #+END_SRC
 ** Random Note
 #+BEGIN_SRC emacs-lisp
