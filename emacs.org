@@ -562,15 +562,16 @@ All of my packages for interacting with my computer.
 *** macOS
 **** Key Bindings
 #+BEGIN_SRC emacs-lisp
-        (when (is-mac-p)
-        ;;  (setq mac-option-key-is-meta nil
-        ;;        mac-command-key-is-meta t
-        ;;        mac-command-modifier 'meta
-        ;;        mac-option-modifier nil))
-          (setq mac-command-modifier 'super
-                mac-option-modifier 'meta
-                mac-control-modifier 'control
-                ns-function-modifier 'hyper))
+  (when (is-mac-p)
+  ;;  (setq mac-option-key-is-meta nil
+  ;;        mac-command-key-is-meta t
+  ;;        mac-command-modifier 'meta
+  ;;        mac-option-modifier nil))
+    (setq mac-command-modifier 'super
+          mac-option-modifier 'meta
+        mac-right-option-modifier 'none
+          mac-control-modifier 'control
+          ns-function-modifier 'hyper))
 #+END_SRC
 **** Face Attributes
 #+BEGIN_SRC emacs-lisp
@@ -2222,7 +2223,7 @@ Add structure templates for editing Emacs Lisp and encrypting an org-mode file.
 Task can just archive normally to the Archive heading in the archive file
 #+BEGIN_SRC emacs-lisp
     (setq org-archive-mark-done nil)
-    (setq org-archive-location "%s_archive::* Archived Tasks")
+    (setq org-archive-location "~/org/gtd/gtd.org::* Archives")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
